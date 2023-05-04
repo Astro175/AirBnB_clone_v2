@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Bash script that prepares the servers
 
 if ! command -v nginx &> /dev/null; then
