@@ -4,7 +4,6 @@ from fabric.api import local
 from datetime import datetime
 
 
-@task
 def do_pack():
     """Packs the contents of the web_static folder into a tgz archive."""
     try:
@@ -13,5 +12,5 @@ def do_pack():
         file_name = "web_static_{}.tgz".format(now)
         local("tar -czvf versions/{} web_static".format(file_name))
         return "versions/{}".format(file_name)
-    except:
+    except Exception as e:
         return None
