@@ -24,3 +24,6 @@ def c(text):
     """Function that displays C is text variable"""
     text = text.replace("_", " ")
     return "C {}".format(text)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
