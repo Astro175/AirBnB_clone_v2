@@ -16,25 +16,18 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instantiates a new model"""
-        if not kwargs:
-            #from models import storage
+        if 'id' not in kwargs:
             self.id = str(uuid.uuid4())
+        if 'created_at' not in kwargs:
             self.created_at = datetime.now()
+        if 'updated_at' not in kwargs:
             self.updated_at = datetime.now()
-            #storage.new(self)
-        else:
-            for k in kwargs:
-                if k in ['created_at', 'updated_at']:
-                    setattr(self, k, datetime.fromisoformat(kwargs[k]))
-                elif k != '__class__':
-                    setattr(self, k, kwargs[k])
-            if storage_type == 'db':
-                if not hasattr(kwargs, 'id'):
-                    setattr(self, 'id', str(uuid.uuid4()))
-                if not hasattr(kwargs, 'created_at'):
-                    setattr(self, 'created_at', datetime.now())
-                if not hasattr(kwargs, 'updated_at'):
-                    setattr(self, 'updated_at', datetime.now())
+
+        for k, v in kwargs.items():
+            if k in ['created_at', 'updated_at']:
+                setattr(self, k, datetime.fromisoformat(v))
+            elif k != '__class__':
+                setattr(self, k, v)
 
     def __str__(self):
         """Returns a string representation of the instance"""
